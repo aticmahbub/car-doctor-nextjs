@@ -56,7 +56,13 @@ export default function NavBar() {
                     </ul>
                 </div>
                 <Link href={'/'} className='text-xl'>
-                    <Image src={'/assets/logo.svg'} width={107} height={87} />
+                    <Image
+                        priority
+                        alt='logo'
+                        src={'/assets/logo.svg'}
+                        width={107}
+                        height={87}
+                    />
                 </Link>
             </div>
             <div className='navbar-center hidden lg:flex'>
