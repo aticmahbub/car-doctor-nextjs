@@ -1,8 +1,8 @@
-import dbConnect from '@/lib/dbConnect';
+import dbConnect, {collectionsObj} from '@/lib/dbConnect';
 import React from 'react';
 
 export default async function ServicesSection() {
-    const serviceCollection = dbConnect('services');
+    const serviceCollection = dbConnect(collectionsObj.servicesCollection);
     const data = await serviceCollection.find({}).toArray();
     console.log(data);
     return (
