@@ -9,7 +9,7 @@ export default function RegisterForm() {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        registerUser({name, email, password});
+        await registerUser({name, email, password});
     };
     return (
         <div>
