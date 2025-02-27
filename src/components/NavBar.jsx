@@ -1,8 +1,11 @@
+'use client';
+import {signOut, useSession} from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 export default function NavBar() {
+    const {data: session, status} = useSession();
     const navLinks = () => {
         return (
             <>
@@ -14,12 +17,6 @@ export default function NavBar() {
                 </li>
                 <li>
                     <Link href={'/services'}>Services</Link>
-                </li>
-                <li>
-                    <Link href={'/blog'}>Blog</Link>
-                </li>
-                <li>
-                    <Link href={'/contact'}>Contact</Link>
                 </li>
             </>
         );
@@ -69,6 +66,20 @@ export default function NavBar() {
                 <ul className='menu menu-horizontal px-1'>{navLinks()}</ul>
             </div>
             <div className='navbar-end'>
+                {status == 'authenticated' ? (
+                    <>
+                        <li onClick={() => signOut()}>Logout</li>
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <Link href={'/login'}>Login</Link>
+                        </li>
+                        <li>
+                            <Link href={'/registration'}>Registration</Link>
+                        </li>
+                    </>
+                )}
                 <a className='btn btn-outline'>Appointment</a>
             </div>
         </div>

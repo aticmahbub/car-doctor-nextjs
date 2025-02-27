@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
 import {signIn} from 'next-auth/react';
+import {useRouter} from 'next/navigation';
 function LoginForm() {
+    const router = useRouter('/');
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -9,14 +11,17 @@ function LoginForm() {
         const password = form.password.value;
 
         try {
-            await signIn('credentials', {
+            const response = await signIn('credentials', {
                 email,
                 password,
                 callbackUrl: '/',
                 redirect: false,
             });
+            if (response.ok) {
+                router.push('/');
+                form.reset();
+            }
         } catch (error) {
-            console.log(error);
             alert('Invalid Authentication');
         }
     };
